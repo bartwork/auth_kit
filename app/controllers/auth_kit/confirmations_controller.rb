@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AuthKit
   class ConfirmationsController < ApplicationController
     before_action :set_user
