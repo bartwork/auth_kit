@@ -1,5 +1,7 @@
-require "auth_kit/version"
-require "auth_kit/engine"
+# frozen_string_literal: true
+
+require 'auth_kit/version'
+require 'auth_kit/engine'
 
 module AuthKit
   # Address which sends AuthKit e-mails.
@@ -41,5 +43,4 @@ module AuthKit
   # The time the user will be remembered without asking for credentials again.
   mattr_accessor :remember_for
   @@remember_for = 2.weeks
-
 end
