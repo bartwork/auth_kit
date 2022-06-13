@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 module AuthKit
-  class ApplicationController < ActionController::API
+  class ApplicationController < ::ApplicationController
   end
 end
