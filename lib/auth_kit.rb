@@ -2,7 +2,6 @@
 
 require 'auth_kit/version'
 require 'auth_kit/engine'
-require 'auth_kit/jwt'
 require 'auth_kit/jwt/claims_validator'
 require 'auth_kit/jwt/encode'
 require 'auth_kit/jwt/decode'

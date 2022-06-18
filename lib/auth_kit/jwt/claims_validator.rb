@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module AuthKit
   module JWT
     class ClaimsValidator
       NUMERIC_CLAIMS = %i[
-      exp
-      iat
-      nbf
-    ].freeze
+        exp
+        iat
+        nbf
+      ].freeze
 
       def initialize(payload)
         @payload = payload.transform_keys(&:to_sym)
@@ -26,7 +28,8 @@ module AuthKit
 
       def validate_is_numeric(claim)
         return if @payload[claim].is_a?(Numeric)
-        raise DecodeError, "#{claim} claim must be a Numeric value but it is a #{@payload[claim].class}"
+
+        raise StandardError, "#{claim} claim must be a Numeric value but it is a #{@payload[claim].class}"
       end
     end
   end
