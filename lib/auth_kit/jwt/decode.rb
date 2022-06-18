@@ -32,7 +32,7 @@ module AuthKit
       end
 
       def payload
-        parse_and_decode @segments[1]
+        (parse_and_decode(@segments[1])).transform_keys(&:to_sym)
       end
 
       def unsigned_token
