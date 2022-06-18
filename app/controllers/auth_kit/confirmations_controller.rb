@@ -15,7 +15,7 @@ module AuthKit
     private
 
     def set_user
-      User.find_by(confirmation_email_token: params[:token])
+      AuthKit::User.find_by(confirmation_email_token: params[:token])
     end
 
   end

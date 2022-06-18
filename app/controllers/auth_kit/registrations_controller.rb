@@ -4,24 +4,23 @@ module AuthKit
   class RegistrationsController < ApplicationController
 
     def sign_up
-      validate_user
+      if new_user.valid? && new_user.create
+        render json: { message: I18n.t 'auth_kit.passwords.registrations.signed_up' }, status: :ok
+      else
+        render json: { error: new_user.errors.full_messages }, status: :bad_request
+      end
     end
-
 
     private
 
-    def validate_user
-      render json: { error: errors.messages }, status: :bad_request unless new_user.valid?
-    end
-
     def new_user
-      User.new(email: user_params[:email],
-               password: user_params[:password],
-               password_confirmation: user_params[:password_confirmation])
+      AuthKit::User.new(email: user_params[:email],
+                        password: user_params[:password],
+                        password_confirmation: user_params[:password_confirmation])
     end
 
     def user_params
-      params.require(:registration).permit(:lastname, :name, :surname, :email, :password, :password_confirmation)
+      params.require(:registration).permit(:email, :password, :password_confirmation)
     end
 
   end

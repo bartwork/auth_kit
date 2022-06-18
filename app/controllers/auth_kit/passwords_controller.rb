@@ -2,6 +2,16 @@
 
 module AuthKit
   class PasswordsController < ApplicationController
-    def reset_password; end
+    before_action :set_user
+
+    def reset_password
+
+    end
+
+    private
+
+    def set_user
+      AuthKit::User.find_by(confirmation_email_token: params[:token])
+    end
   end
 end

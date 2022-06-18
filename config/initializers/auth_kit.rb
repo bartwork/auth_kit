@@ -2,8 +2,8 @@
 
 # Outgoing email address
 AuthKit.mailer_sender = 'bartworkmail@gmail.com'
-# Your private key
-AuthKit.secret_key = Rails.application.credentials[:secret_key]
+# Your private key Rails.application.credentials[:secret_key]
+AuthKit.secret_key = 'secret'
 # Algorithms for cryptographic signing HS256/HS384/HS512
 AuthKit.hash_algorithm = 'HS256'
 # Refresh token expiration time in seconds

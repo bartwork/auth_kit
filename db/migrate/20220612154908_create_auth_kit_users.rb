@@ -3,9 +3,6 @@
 class CreateAuthKitUsers < ActiveRecord::Migration[7.0]
   def change
     create_table :auth_kit_users do |t|
-      t.string :lastname
-      t.string :name
-      t.string :surname
       t.string :phone, unique: true, where: 'phone IS NOT NULL', default: nil
       t.string :email, unique: true, where: 'email IS NOT NULL', default: nil
       t.string :password_digest, null: false
