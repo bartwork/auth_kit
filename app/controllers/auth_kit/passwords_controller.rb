@@ -4,9 +4,7 @@ module AuthKit
   class PasswordsController < ApplicationController
     before_action :set_user
 
-    def reset_password
-
-    end
+    def reset_password; end
 
     private
 

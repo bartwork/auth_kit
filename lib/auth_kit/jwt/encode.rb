@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module AuthKit
   module JWT
     class Encode
-
-      require "base64"
+      require 'base64'
       require 'json'
 
       def initialize(payload)
@@ -18,7 +19,7 @@ module AuthKit
       private
 
       def encode_header
-        encode64({ "alg": @algorithm, "typ": "JWT" })
+        encode64({ "alg": @algorithm, "typ": 'JWT' })
       end
 
       def encode_payload
@@ -41,7 +42,6 @@ module AuthKit
       def combine(*parts)
         parts.join('.')
       end
-
     end
   end
 end

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module AuthKit
   module JWT
     class Decode
-
-      require "base64"
+      require 'base64'
       require 'json'
 
       def initialize(jwt)
@@ -17,6 +18,7 @@ module AuthKit
         validate_segment_count!
         verify!
         raise(StandardError, 'Invalid payload') unless payload
+
         payload
       end
 
@@ -24,6 +26,7 @@ module AuthKit
 
       def validate_segment_count!
         return if segment_length == 3
+
         raise(StandardError, 'Not enough or too many segments')
       end
 
@@ -45,13 +48,13 @@ module AuthKit
 
       def verify!
         return if OpenSSL::HMAC.hexdigest(@algorithm.sub('HS', 'sha'), @key, unsigned_token) == @signature
+
         raise(StandardError, 'Invalid signature')
       end
 
       def parse_and_decode(segment)
         JSON.parse(Base64.decode64(segment))
       end
-
     end
   end
 end
