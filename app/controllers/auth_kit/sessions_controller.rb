@@ -6,16 +6,16 @@ module AuthKit
 
     def sign_in
       if set_user&.authenticate(user_params[:password]) && update_sign_data(user)
-        render json: { message: I18n.t 'auth_kit.passwords.sessions.signed_in', token: token }, status: :ok
+        render json: { message: 'ok'}, status: :ok
       else
-        render json: { error: I18n.t 'auth_kit.failure.invalid' }, status: :unprocessable_entity
+        render json: { error: 'bad' }, status: :unprocessable_entity
       end
     end
 
     private
 
     def user_params
-      params.require(:session).permit(:email, :phone, :password)
+      params.require(:session).permit(:email, :password)
     end
 
     def set_user
