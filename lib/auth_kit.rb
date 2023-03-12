@@ -24,6 +24,10 @@ module AuthKit
   mattr_accessor :refresh_token_expiration_time
   @@refresh_token_expiration_time ||= nil
 
+  # Access token expiration time in seconds
+  mattr_accessor :access_token_expiration_time
+  @@access_token_expiration_time ||= nil
+
   # Number of active tokens for the user (computer, phone, mobile app, tablet or other devices)
   mattr_accessor :number_active_tokens
   @@number_active_tokens ||= 1

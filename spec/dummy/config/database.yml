@@ -12,5 +12,5 @@ development:
   <<: *default
   database: auth_kit_development
 production:
-    <<: *default
-    database: auth_kit_production
+  <<: *default
+  database: auth_kit_production

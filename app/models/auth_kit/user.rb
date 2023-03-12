@@ -10,7 +10,5 @@ module AuthKit
     validates :phone, uniqueness: true, allow_nil: true
     validates :reset_password_token, :confirmation_email_token, :unlock_token, uniqueness: true, allow_nil: true
 
-
-
   end
 end

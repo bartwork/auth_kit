@@ -6,8 +6,10 @@ AuthKit.mailer_sender = 'bartworkmail@gmail.com'
 AuthKit.secret_key = 'secret'
 # Algorithms for cryptographic signing HS256/HS384/HS512
 AuthKit.hash_algorithm = 'HS256'
+# Access token expiration time in seconds
+AuthKit.access_token_expiration_time = 2.weeks
 # Refresh token expiration time in seconds
-AuthKit.refresh_token_expiration_time = 2.weeks
+AuthKit.refresh_token_expiration_time = 60.day
 # Number of active tokens for the user (computer, phone, mobile app, tablet or other devices)
 AuthKit.number_active_tokens = 5
 # Range validation for password length
