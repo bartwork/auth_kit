@@ -12,7 +12,10 @@ module AuthKit
       end
     end
 
+
     private
+
+
 
     def user_params
       params.require(:session).permit(:email, :password)
@@ -30,8 +33,6 @@ module AuthKit
                   current_sign_in_ip: request.remote_ip)
     end
 
-    def token
-      encode_token({ user_id: user.id })
-    end
+
   end
 end

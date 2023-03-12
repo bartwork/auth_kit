@@ -204,6 +204,7 @@ PLATFORMS
 
 DEPENDENCIES
   auth_kit!
+  bcrypt
   debug (>= 1.0.0)
   pg
   puma
