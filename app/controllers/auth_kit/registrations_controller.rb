@@ -18,7 +18,7 @@ module AuthKit
       ActiveRecord::Base.transaction do
         user = AuthKit::User.new user_params
         user.save
-        session = AuthKit::RefreshSession.new(user: user, expires_in: refresh_token_expiration_time)
+        session = AuthKit::RefreshSession.new(user: user, expires_in: AuthKit::JWT::RefreshToken.new.expiration_time)
         session.expires_in = DateTime.current
         session.save
       end
@@ -36,13 +36,6 @@ module AuthKit
       params.require(:registration).permit(:email, :password, :password_confirmation)
     end
 
-    def refresh_token_expiration_time
-      (DateTime.now + AuthKit.refresh_token_expiration_time).to_time.to_i
-    end
-
-    def access_token_expiration_time
-      (DateTime.now + AuthKit.access_token_expiration_time).to_time.to_i
-    end
 
     # TODO refactor payload
     def success_message
@@ -56,7 +49,7 @@ module AuthKit
     def access_token
       AuthKit::JWT::Encode.new(
         user_id: new_user.id,
-        exp: refresh_token_expiration_time,
+        exp: AuthKit::JWT::AccessToken.new.expiration_time,
         iat: DateTime.now.to_time.to_i
       ).segments
     end
