@@ -6,7 +6,7 @@ module AuthKit
     before_action :find_user
 
     def sign_in
-      if find_user&.authenticate(user_params[:password]) && user.update_sign_data(request.remote_ip)
+      if find_user&.authenticate(user_params[:password]) && find_user.update_sign_data(request.remote_ip)
         success_message('auth_kit.passwords.registrations.signed_in.success', find_user)
       else
         error_message('auth_kit.passwords.registrations.signed_in.error')
