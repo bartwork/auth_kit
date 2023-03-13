@@ -10,6 +10,11 @@ require 'auth_kit/jwt/access_token'
 
 module AuthKit
   include JWT
+
+  # Registration Policy (0 - email, 1 - phone, 2 - both)
+  mattr_accessor :registration_policy
+  @@registration_policy ||= nil
+
   # Address which sends AuthKit e-mails.
   mattr_accessor :mailer_sender
   @@mailer_sender ||= nil
@@ -37,6 +42,10 @@ module AuthKit
   # Range validation for password length
   mattr_accessor :password_length
   @@password_length ||= 6..128
+
+  # Used to send notification to the original user phone when their phone is changed.
+  mattr_accessor :send_phone_changed_notification
+  @@send_phone_changed_notification ||= true
 
   # Used to send notification to the original user email when their email is changed.
   mattr_accessor :send_email_changed_notification
