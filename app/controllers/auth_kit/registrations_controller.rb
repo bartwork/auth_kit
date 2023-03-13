@@ -2,13 +2,13 @@
 
 module AuthKit
   class RegistrationsController < ApplicationController
-    include Tokens
+    include ResponsePayload
 
     def sign_up
       if create_user_and_refresh_token
-        render json: success_message, status: :ok
+        success_message('auth_kit.passwords.registrations.signed_up.success', sign_up_user)
       else
-        render json: error_message, status: :bad_request
+        error_message('auth_kit.passwords.registrations.signed_up.error')
       end
     end
 
@@ -24,11 +24,7 @@ module AuthKit
       end
     end
 
-    def refresh_token
-      new_user.refresh_session.last.refresh_token
-    end
-
-    def new_user
+    def sign_up_user
       AuthKit::User.find_by(email: params['registration']['email'])
     end
 
@@ -36,26 +32,5 @@ module AuthKit
       params.require(:registration).permit(:email, :password, :password_confirmation)
     end
 
-
-    # TODO refactor payload
-    def success_message
-      {
-        message: 'auth_kit.passwords.registrations.signed_up',
-        refresh_token: refresh_token,
-        access_token: access_token
-      }
-    end
-
-    def access_token
-      AuthKit::JWT::Encode.new(
-        user_id: new_user.id,
-        exp: AuthKit::JWT::AccessToken.new.expiration_time,
-        iat: DateTime.now.to_time.to_i
-      ).segments
-    end
-
-    def error_message
-      { error: new_user.errors.full_messages }
-    end
   end
 end
