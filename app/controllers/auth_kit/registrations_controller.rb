@@ -18,7 +18,7 @@ module AuthKit
       ActiveRecord::Base.transaction do
         user = AuthKit::User.new user_params
         user.save
-        session = AuthKit::RefreshSession.new(user: user, expires_in: AuthKit::JWT::RefreshToken.new.expiration_time)
+        session = AuthKit::RefreshSession.new(user: user)
         session.expires_in = DateTime.current
         session.save
       end
