@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-phone
+
 # Registration Policy (0 - email, 1 - phone, 2 - both)
 AuthKit.registration_policy = 0
 # Outgoing email address

@@ -2,37 +2,26 @@
 
 module AuthKit
   class SessionsController < ApplicationController
-    before_action :set_user
+    include ResponsePayload
+    before_action :find_user
 
     def sign_in
-      if set_user&.authenticate(user_params[:password]) && update_sign_data(user)
-        render json: { message: 'ok'}, status: :ok
+      if find_user&.authenticate(user_params[:password]) && user.update_sign_data(request.remote_ip)
+        success_message('auth_kit.passwords.registrations.signed_in.success', find_user)
       else
-        render json: { error: 'bad' }, status: :unprocessable_entity
+        error_message('auth_kit.passwords.registrations.signed_in.error')
       end
     end
 
-
     private
-
-
 
     def user_params
       params.require(:session).permit(:email, :password)
     end
 
-    def set_user
+    def find_user
       AuthKit::User.find_by(email: user_params[:email])
     end
-
-    def update_sign_data(user)
-      user.update(last_sign_in_at: user.user.sign_in_count,
-                  current_sign_in_at: DateTime.now,
-                  sign_in_count: ++user.sign_in_count,
-                  last_sign_in_ip: user.current_sign_in_ip,
-                  current_sign_in_ip: request.remote_ip)
-    end
-
 
   end
 end
