@@ -6,9 +6,9 @@ module AuthKit
 
     def confirm_email
       if set_user&.update(confirmed_at: DateTime.now)
-        render json: { message: I18n.t 'auth_kit.confirmations.success_confirm_email' }, status: :ok
+        render json: 'ok', status: :ok
       else
-        render json: { error: I18n.t 'auth_kit.errors.messages.invalid_token' }, status: :bad_request
+        render json: 'error', status: :bad_request
       end
     end
 
