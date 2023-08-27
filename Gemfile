@@ -8,8 +8,8 @@ gemspec
 gem 'bcrypt'
 
 group :development, :test do
+  gem 'debug', '>= 1.0.0'
   gem 'pg'
   gem 'puma'
-  gem 'debug', '>= 1.0.0'
   gem 'rubocop'
 end

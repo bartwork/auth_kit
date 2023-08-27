@@ -17,7 +17,8 @@ module AuthKit
     def create_user_and_refresh_token
       ActiveRecord::Base.transaction do
         user = AuthKit::User.new user_params
-        user.save
+        raise ActiveRecord::Rollback unless user.save
+
         session = AuthKit::RefreshSession.new(user: user)
         session.expires_in = DateTime.current
         session.save
@@ -31,6 +32,5 @@ module AuthKit
     def user_params
       params.require(:registration).permit(:email, :password, :password_confirmation)
     end
-
   end
 end

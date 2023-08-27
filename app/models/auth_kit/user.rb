@@ -6,7 +6,8 @@ module AuthKit
     has_many :refresh_session, autosave: true
     has_secure_password
     has_secure_token :confirmation_email_token, length: 36
-    validates :email, presence: true, uniqueness: true
+    validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+    validates :password, :password_confirmation, presence: true
     validates :phone, uniqueness: true, allow_nil: true
     validates :reset_password_token, :confirmation_email_token, :unlock_token, uniqueness: true, allow_nil: true
 
