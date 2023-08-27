@@ -1,5 +1,5 @@
 # AuthKit
-Решение для JWT-аутентификации в RubyOnRails.
+Комплексное решение для JWT-аутентификации в RubyOnRails.
 
 ## Установка
 Добавить gem в Gemfile:
