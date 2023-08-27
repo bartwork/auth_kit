@@ -10,6 +10,9 @@ RSpec.describe 'Registrations', type: :request do
   it 'Valid user registration' do
     data = { registration: { email: 'bartworkmail@gmail.com', password: '123456', password_confirmation: '123456' } }
     post url, params: data, headers: headers
+    body = JSON.parse(response.body)
+    expect(body.key?('refresh_token')).to be true
+    expect(body.key?('access_token')).to be true
     expect(response.content_type).to eq(content_type)
     expect(response).to have_http_status(:ok)
   end
