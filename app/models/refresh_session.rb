@@ -6,6 +6,7 @@ module AuthKit
     before_create :set_expires_in
 
     private
+
     def set_expires_in
       self.expires_in = AuthKit::JWT::RefreshToken.new.expiration_time unless expires_in
     end
